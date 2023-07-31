@@ -1,0 +1,35 @@
+.header {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    padding: 10px;
+}
+  
+.header a {
+    color: black;
+    text-align: center;
+
+    font-size: 18px;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-decoration: none;
+
+    padding: 10px 20px;
+    line-height: 25px;
+    border-radius: 10px;
+}
+
+.header a:hover {
+    background-color: rgb(213, 215, 216);
+}
+
+.header a.active {
+    color: black;
+    background-color: grey;
+}
+
+hr.solid {
+    border-bottom: 3px solid #bbb;
+}

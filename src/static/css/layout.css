@@ -1,0 +1,23 @@
+/* TABLES */
+
+@import url("table.css");
+
+/* PAGINATION */
+
+@import url("pagination.css");
+
+/* HEADER */
+
+@import url("header.css");
+
+/* CRUD BUTTONS */
+
+@import url("crud.css");
+
+/* FORM */
+
+@import url("form.css");
+
+/* ERRORS */
+
+@import url("errors.css");

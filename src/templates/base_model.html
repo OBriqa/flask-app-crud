@@ -1,0 +1,131 @@
+{% extends './layout.html' %}
+
+{% block title %} {{ titol }} {% endblock %}
+
+{% block script %}
+    <script src="{{ url_for('static', filename='javascript/getURL.js') }}"></script>
+{% endblock %}
+
+{% block header %}
+
+    <div class="header">
+        {% for class in classes %}
+            {% if class | lower == titol | lower %}
+                <a href="/{{ class | replace(' ', '') }}" class="active">{{ class | upper }}</a>
+            {% else %}
+                <a href="/{{ class | replace(' ', '') }}">{{ class | upper }}</a>   
+            {% endif%}
+        {% endfor %}
+    </div>
+
+    <hr class="solid">
+
+{% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        <tr class="table-header">
+            {% for i in range(headings | length ) %}
+            <th class="table-element">
+                <a href="javascript:void(0);" onclick="location.href = getURL('{{ current_url }}', -1, '{{ attributes[i] }}');">{{ headings[i] }}</a>
+            </th>
+            {% endfor %} 
+        </tr>
+        {% for row in data %}
+        <tr class="table-row">
+            {% for attribute in attributes %}
+                {% if attribute in id %}
+                    <td class="table-element">
+                        <a href="/{{ id_class[attribute] }}/{{ row[attribute] }}">{{ row[attribute] }}</a>
+                    </td>
+                {% elif attribute in fid_class %}
+                    <td class="table-element">
+                        <a href="/{{ id_class[fid_class[attribute]] }}/{{ row[attribute] }}">{{ row[attribute] }}</a>
+                    </td>
+                {% else %}
+                    <td class="table-element">{{ row[attribute] }}</td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="pagination">
+
+        {% if num_page > 1 %}
+            <a href="javascript:void(0);" onclick="location.href = getURL('{{ current_url }}', '{{ (num_page-1) }}');">&laquo;</a>
+        {% else  %}
+            <a href="javascript:void(0);" onclick="location.href = getURL('{{ current_url }}', 1);">&laquo;</a>
+        {% endif %}
+
+        {% if max_page <= num_nav_buttons %}
+
+            {% for i in range(1, max_page+1) %}
+
+                {% if num_page == i %}
+                    <a href="javascript:void(0);" onclick="location.href = getURL('{{ current_url }}', '{{ i }}');" class="active">{{ i }}</a>
+                {% else %}
+                    <a href="javascript:void(0);" onclick="location.href = getURL('{{ current_url }}', '{{ i }}');">{{ i }}</a>
+                {% endif %}
+
+            {% endfor %}
+
+        {% else %}
+
+            {% if num_page < num_nav_buttons %}
+
+                {% for i in range(1, num_nav_buttons) %}
+                    {% if num_page == i %}
+                        <a href="javascript:void(0);" onclick="location.href = getURL('{{ current_url }}', '{{ i }}');" class="active">{{ i }}</a>
+                    {% else %}
+                        <a href="javascript:void(0);" onclick="location.href = getURL('{{ current_url }}', '{{ i }}');">{{ i }}</a>
+                    {% endif %}
+                {% endfor %}
+                <a href="#">...</a>
+                <a href="javascript:void(0);" onclick="location.href = getURL('{{ current_url }}', '{{ max_page }}');">{{ max_page }}</a>
+
+            {% elif num_page > (max_page - num_nav_buttons + 1) %}
+
+                <a href="javascript:void(0);" onclick="location.href = getURL('{{ current_url }}', 1);">1</a>
+                <a href="#">...</a>
+                {% for i in range(max_page - num_nav_buttons + 1, max_page) %}
+                    {% if num_page == (i + 1) %}
+                        <a href="javascript:void(0);" onclick="location.href = getURL('{{ current_url }}', '{{ (i+1) }}');" class="active">{{ (i + 1) }}</a>
+                    {% else %}
+                        <a href="javascript:void(0);" onclick="location.href = getURL('{{ current_url }}', '{{ (i+1) }}');">{{ (i + 1) }}</a>
+                    {% endif %}
+                {% endfor %}
+
+            {% else %}
+
+                <a href="javascript:void(0);" onclick="location.href = getURL('{{ current_url }}', 1);">1</a>
+                <a href="#">...</a>
+                {% for i in range(num_nav_buttons-2) %}
+                    {% if i == 0 %}
+                        <a href="javascript:void(0);" onclick="location.href = getURL('{{ current_url }}', '{{ (num_page+1) }}');" class="active">{{ (num_page+i) }}</a>
+                    {% else %}
+                        <a href="javascript:void(0);" onclick="location.href = getURL('{{ current_url }}', '{{ (num_page+1) }}');">{{ (num_page+i) }}</a>
+                    {% endif %}
+                {% endfor %}
+                <a href="#">...</a>
+                <a href="?page={{ max_page }}">{{ max_page }}</a>
+
+            {% endif %}
+
+        {% endif %}
+        
+        {% if num_page < (max_page-1) %}
+            <a href="javascript:void(0);" onclick="location.href = getURL('{{ current_url }}', '{{ (num_page+1) }}');">&raquo;</a>
+        {% else  %}
+            <a href="javascript:void(0);" onclick="location.href = getURL('{{ current_url }}', '{{ max_page }}');">&raquo;</a>
+        {% endif %}
+
+    </div>
+
+    <div class="crud">
+        <a href="/{{ titol | lower | replace(' ', '') }}/afegir">AFEGIR</a>
+        <a href="/{{ titol | lower | replace(' ', '') }}/cercar">CERCAR</a>
+    </div>
+
+{% endblock %}

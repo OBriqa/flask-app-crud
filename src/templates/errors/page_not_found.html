@@ -1,0 +1,9 @@
+{% extends './layout.html' %}
+
+{% block title %} Page not found {% endblock %}
+
+{% block body %}
+    <div class="error">
+        <h3 class="title">Error 404. Page not found <a href="{{ url_for(redirect) }}">Return</a></h3>
+    </div>
+{% endblock %}

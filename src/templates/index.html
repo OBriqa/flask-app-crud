@@ -1,0 +1,19 @@
+{% extends './layout.html' %}
+
+{% block title %} {{ titol }} {% endblock %}
+
+{% block script %}
+    <script src="{{ url_for('static', filename='javascript/getURL.js') }}"></script>
+{% endblock %}
+
+{% block header %}
+
+    <div class="header">
+        {% for class in classes %}
+            <a href="/{{ class | replace(' ', '') }}">{{ class | upper }}</a>
+        {% endfor %}
+    </div>
+
+    <hr class="solid">
+
+{% endblock %}

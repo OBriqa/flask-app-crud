@@ -1,0 +1,35 @@
+.crud {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+        
+    padding: 10px;
+}
+
+.crud a, input {
+    color: black;
+    text-align: center;
+
+    font-size: 16px;
+    font-weight: bold;
+    font-family: sans-serif;
+    text-decoration: none;
+
+    padding: 10px 20px;
+    line-height: 10px;
+    border-radius: 10px;
+}
+
+.crud input {
+    border: none;
+    background-color: white;
+}
+
+.crud a:hover, input:hover {
+    background-color: rgb(213, 215, 216);
+}
+
+.crud a.active {
+    color: black;
+    background-color: grey;
+}

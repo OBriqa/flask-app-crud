@@ -1,0 +1,12 @@
+{% extends './layout.html' %}
+
+{% block title %} Internal Server Error. {% endblock %}
+
+{% block body %}
+
+<div class="error">
+    <h3 class="title"> Internal Server Error. <a href="{{ url_for(redirect) }}">Return</a></h3>
+    <h3>{{ error }}</h3>
+</div>
+
+{% endblock %}

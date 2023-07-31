@@ -1,0 +1,40 @@
+{% extends './layout.html' %}
+
+{% block title %} {{ titol }} {% endblock %}
+
+{% block header %}
+
+    <div class="header">
+        <a href="/{{ titol | lower | replace(' ', '') }}" class="active">{{ titol | upper }}</a>
+    </div>
+
+    <hr class="solid">
+
+{% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        <tr class="table-header">
+            {% for header in headings %}
+            <th class="table-element">{{ header }}</th>
+            {% endfor %} 
+        </tr>
+        {% for row in data %}
+        <tr class="table-row">
+            {% for attribute in attributes %}
+                <td class="table-element">{{ row[attribute] }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="crud">
+        <a href="actualitzar/{{ id }}">ACTUALITZAR</a>
+
+        <form action="delete/{{ id }}" method="POST">
+            <input type="submit" value="ESBORRAR">
+        </form>            
+    </div>
+
+{% endblock %}

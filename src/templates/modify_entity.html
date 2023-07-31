@@ -1,0 +1,35 @@
+{% extends './layout.html' %}
+
+{% block title %} {{ titol }} {% endblock %}
+
+{% block header %}
+
+    <div class="header">
+        <a href="/{{ titol | lower }}" class="active">{{ titol | upper }}</a>
+    </div>
+
+    <hr class="solid">
+
+{% endblock %}
+
+{% block body %}
+
+<div class="form-container">
+    <form action="../update/{{ id }}" method="POST">
+        {% for i in range(headings | length) %}
+            <div class="form-input">
+                <label for="{{ attributes[i] }}">{{ headings[i] }}</label><br>
+                {% if attributes[i] == 'dataN' %}
+                    <input type="date" id="{{ attributes[i] }}" name="{{ attributes[i] }}" value="{{ data[attributes[i]] }}"><br><br>
+                {% else %}
+                    <input type="text" id="{{ attributes[i] }}" name="{{ attributes[i] }}" value="{{ data[attributes[i]] }}"><br><br>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <div class="form-submit">
+            <input type="submit" value="ACTUALITZA">
+        </div>
+    </form> 
+</div>
+
+{% endblock %}
